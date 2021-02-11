@@ -1,2 +1,2 @@
 # JavaScript_30
-Learning Vanilla JavaScript in javascript30.com for Deeper Understanding of JavaScript
+Vanilla JavaScript Coding Challenge for Studying JavaScript
