@@ -37,29 +37,97 @@
     
     // Array.prototype.filter()
     // 1. Filter the list of inventors for those who were born in the 1500's
-
+    var first = inventors.filter(inventor => inventor.year >= 1500 && inventor.year < 1600);
+    console.log("First");
+    console.table(first);
     // Array.prototype.map()
     // 2. Give us an array of the inventors first and last names
-
+    var second = inventors.map(inventor => inventor.first + " " + inventor.last);
+    console.log("Second");
+    console.log(second);
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
+    /*
+    var third = inventors.sort(function(a,b) {
+      if(a.year < b.year) {
+        return -1;
+      }
+      else {
+        return 1;
+      }
+    });
+    */
 
+    var third = inventors.sort((a,b) => a.year > b.year ? 1 : -1);
+    console.log("Third");
+    console.table(third);
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live all together?
+    /*
+    var forth = inventors.reduce(function(acc,cur,idx,src) {
+      return acc + (cur.passed - cur.year + 1);
+    },0);
+    */
 
+    var forth = inventors.reduce((total, inventor) => {
+      return total + (inventor.passed - inventor.year + 1);
+    },0);
+    console.log("Forth");
+    console.log(forth);
     // 5. Sort the inventors by years lived
+    var fifth = inventors.sort(function(a,b) {
+      var a_lived = a.passed - a.year + 1;
+      var b_lived = b.passed - b.year + 1;
 
+      if(a_lived < b_lived) {
+        return 1;
+      }
+      else {
+        return -1;
+      }
+    });
+
+    console.log("Fifth");
+    console.table(fifth);
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
-
+    // do it in wikipedia page javascript console
+    // const category = document.querySelector('.mw-category');
+    // const links = Array.from(category.querySelectorAll('a'));
+    // const de = links
+    //               .map(link => link.textContent)
+    //               .filter(streetName => streetName.includes('de'));
 
     // 7. sort Exercise
     // Sort the people alphabetically by last name
+    var seventh = people.sort(function(a,b) {
+      //var a_last = a.split(' ')[0];
+      //var b_last = b.split(' ')[0];
 
+      const [aLast, aFirst] = a.split(', ');
+      const [bLast, bFirst] = b.split(', ');
+      if(aLast < bLast) {
+        return -1;
+      } else {
+        return 1;
+      }
+    });
+
+    console.log("Seventh");
+    console.table(seventh);
     // 8. Reduce Exercise
     // Sum up the instances of each of these
     const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
+    var eighth = data.reduce(function(obj, item) {
+      if(!obj[item]) {
+        obj[item] = 0;
+      }
 
+      obj[item]++; // sum up the instances of each of data
+      return obj;
+    }, {});
+    console.log("Eighth");
+    console.log(eighth);
   </script>
 </body>
 </html>
