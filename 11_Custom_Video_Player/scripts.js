@@ -74,5 +74,15 @@ progress.addEventListener('mousemove',(e) => {
 progress.addEventListener('mousedown',() => mouseDown = true);
 progress.addEventListener('mouseup',() => mouseDown = false);
 
-fullScreen.addEventListener('click', () => {video.requestFullscreen()});
+fullScreen.addEventListener('click', () => {
+    if (video.requestFullscreen) {
+        video.requestFullscreen();
+      } else if (video.mozRequestFullScreen) {
+        video.mozRequestFullScreen();
+      } else if (video.webkitRequestFullscreen) {
+        video.webkitRequestFullscreen();
+      } else if (video.msRequestFullscreen) { 
+        video.msRequestFullscreen();
+      }
+});
 
