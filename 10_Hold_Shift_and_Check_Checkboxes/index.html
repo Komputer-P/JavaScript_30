@@ -111,7 +111,7 @@
         // from start of the checked checkbox (this), inBetween = true
         // and end of the checked checkbox (lastCheckedd), inBetween = false
         if(checkbox === this || checkbox === lastChecked) {
-          inBetween = !inBetween;
+          inBetween = !inBetween; //flapping!
         }
         
         //during inBetween = true (is in between start and the last)
