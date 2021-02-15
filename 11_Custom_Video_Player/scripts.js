@@ -9,6 +9,9 @@ const toggle = player.querySelector('.toggle');
 const skipButtons = player.querySelectorAll('[data-skip]');
 const ranges = player.querySelectorAll('.player__slider');
 
+const fullScreen = player.querySelector('.full__screen');
+
+
 video.defaultPlaybackRate = 1.0;
 /* Build Functions */
 function togglePlay(e) {
@@ -70,3 +73,6 @@ progress.addEventListener('mousemove',(e) => {
 });
 progress.addEventListener('mousedown',() => mouseDown = true);
 progress.addEventListener('mouseup',() => mouseDown = false);
+
+fullScreen.addEventListener('click', () => {video.requestFullscreen()});
+
