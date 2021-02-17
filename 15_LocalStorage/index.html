@@ -23,13 +23,24 @@
       <input type="text" name="item" placeholder="Item Name" required>
       <input type="submit" value="+ Add Item">
     </form>
+    <div class="options">
+      <input type="button" class="clearAll" value="Clear All">
+      <input type="button" class="checkAll" value="Check All">
+      <input type="button" class="uncheckAll" value="Uncheck All">
+    </div>
   </div>
 
 <script>
+  //GET ELEMENTS
   const addItems = document.querySelector('.add-items');
   const itemsList = document.querySelector('.plates');
-  const items = JSON.parse(localStorage.getItem('items')) || [];
+  var items = JSON.parse(localStorage.getItem('items')) || [];
+  
+  const clearAll = document.querySelector('.clearAll');
+  const checkAll = document.querySelector('.checkAll');
+  const uncheckAll = document.querySelector('.uncheckAll');
 
+  //ADD FUNCTIONS
   function addItem(e) {
     e.preventDefault();
     const text = (this.querySelector('[name=item]')).value;
@@ -45,14 +56,19 @@
   }
 
   function populateList(plates = [], platesList) {
-    platesList.innerHTML = plates.map((plate, i) => {
-      return `
-        <li>
-          <input type="checkbox" data-index=${i} id="item${i}" ${plate.done ? "checked" : ""} />
-          <label for="item${i}">${plate.text}</label>
-        </li>
-      `;
-    }).join('');
+
+    if(plates.length === 0) {
+      platesList.innerHTML = '<li>Loading Tapas...</li>';
+    } else {
+      platesList.innerHTML = plates.map((plate, i) => {
+        return `
+          <li>
+            <input type="checkbox" data-index=${i} id="item${i}" ${plate.done ? "checked" : ""} />
+            <label for="item${i}">${plate.text}</label>
+          </li>
+        `;
+      }).join('');
+    }
   }
 
   //event delegation
@@ -66,13 +82,37 @@
     populateList(items, itemsList);
   }
 
+  //event delegation
+  function clearAllItems(e) {
+    items = [];
+    localStorage.clear();
+    populateList(items, itemsList);
+  }
+  
+  //event delegation
+  function checkAllItems(e) {
+    items.forEach(item => {item.done = true});
+    localStorage.setItem('items', JSON.stringify(items));
+    populateList(items, itemsList);
+  }
+
+  //event delegation
+  function uncheckAllItems(e) {
+    items.forEach(item => {item.done = false});
+    localStorage.setItem('items', JSON.stringify(items));
+    populateList(items, itemsList);
+  }
+
+  //ADD EVENT LISTENERS
   addItems.addEventListener('submit', addItem);
   itemsList.addEventListener('click', toggleDone);
+  
+  clearAll.addEventListener('click',clearAllItems);
+  checkAll.addEventListener('click',checkAllItems);
+  uncheckAll.addEventListener('click',uncheckAllItems);
+
   populateList(items, itemsList);
-
-
 </script>
-
 
 </body>
 </html>
