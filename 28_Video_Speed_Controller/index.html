@@ -14,34 +14,34 @@
     </div>
   </div>
 
-<script>
-  //ADD ELEMETNS
-  const speed = document.querySelector('.speed');
-  const bar = speed.querySelector('.speed-bar');
-  const video  = document.querySelector('.flex');
-  let isDown = false;
-
-  //ADD FUNCTIONS
-  function handleMove(e) {
-    if(isDown) {
-      const y = e.pageY - this.offsetTop;
-      const percent = y / this.offsetHeight;
-      const MIN = 0.4;
-      const MAX = 4;
-      const height = Math.round(percent * 100) + '%';
-      const playbackRate = percent * (MAX-MIN) + MIN;
-
-      bar.style.height = height;
-      bar.textContent = playbackRate.toFixed(2) + 'x';
-
-      video.playbackRate = playbackRate;
+  <script>
+    //ADD ELEMETNS
+    const speed = document.querySelector('.speed');
+    const bar = speed.querySelector('.speed-bar');
+    const video  = document.querySelector('.flex');
+    let isDown = false;
+  
+    //ADD FUNCTIONS
+    function handleMove(e) {
+      if(isDown) {
+        const y = e.pageY - this.offsetTop;
+        const percent = y / this.offsetHeight;
+        const MIN = 0.4;
+        const MAX = 4;
+        const height = Math.round(percent * 100) + '%';
+        const playbackRate = percent * (MAX-MIN) + MIN;
+  
+        bar.style.height = height;
+        bar.textContent = playbackRate.toFixed(2) + 'x';
+  
+        video.playbackRate = playbackRate;
+      }
     }
-  }
-
-  //ADD EVENT LISTENERS
-  speed.addEventListener('mousemove', handleMove);
-  speed.addEventListener('mousedown', () => {isDown = true; });
-  speed.addEventListener('mouseup', () => {isDown = false; });
-</script>
+  
+    //ADD EVENT LISTENERS
+    speed.addEventListener('mousemove', handleMove);
+    speed.addEventListener('mousedown', () => {isDown = true; });
+    speed.addEventListener('mouseup', () => {isDown = false; });
+  </script>
 </body>
 </html>
